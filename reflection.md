@@ -36,13 +36,30 @@ When the guess is too high, the message tells the player to go higher, which is 
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
 
 
-I used Claude built-in agent (access is provided by Codepath). Claude debugging results indicates that the function check_guess() is incorrectly implemented due to hint bug, if guess number is greater than the secret number, it is expected for the hint to say "go lower", but the logic gives the oppsite. 
+- I used Claude built-in agent (access is provided by Codepath). Claude debugging results indicates that the function check_guess() is incorrectly implemented due to hint bug, if guess number is greater than the secret number, it is expected for the hint to say "go lower", but the logic gives the oppsite. 
 
 if g > secret:
     return "Too High", "ð Go HIGHER!"  # BUG: same backwards hint
 return "Too Low", "ð Go LOWER!"
 Same inverted hint bug in the string comparison path.
 
+ - Claude suggests that I implemented below fix: swapped with 50 for the range for normal and 100 for the hard level, this is correct implementation.
+
+ def get_range_for_difficulty(difficulty: str):
+    if difficulty == "Easy":
+        return 1, 20
+    if difficulty == "Normal": 
+        return 1, 50 # FIXME: Logic breaks here, swapped 100 with 50
+    if difficulty == "Hard":
+        return 1, 100 # FIXME: Logic breaks here, swapped 50 with 100
+    return 1, 100 
+
+- Claude suggested below incorrect implementation after I updated with above code logic:
+if difficulty == "Normal":
+    return 1, 100
+if difficulty == "Hard":
+    return 1, 50
+which is the reverting back to original incorrect code, this is AI hallucination.
 
 
 
@@ -54,6 +71,22 @@ Same inverted hint bug in the string comparison path.
 - Describe at least one test you ran (manual or using pytest)  
   and what it showed you about your code.
 - Did AI help you design or understand any tests? How?
+
+
+- I asked claude to list all the bugs for each code file and provide solutions summary:
+
+For example for app.py, below are the fixes:
+
+Fix	Line	Change
+1	7-10	Swapped Normal/Hard ranges back to 100/50
+2	38-40	Inverted hints: Too High → LOWER, Too Low → HIGHER
+3	45-47	Same hint fix in string fallback path
+4	52	Removed + 1 from win score formula
+5	135	New game resets attempts to 1 not 0
+6	136	New game uses randint(low, high) not randint(1, 100)
+7	110	Info bar shows {low} and {high} instead of hardcoded 100
+
+I went through the fix one by one and verify the results accordingly with the result.
 
 ---
 

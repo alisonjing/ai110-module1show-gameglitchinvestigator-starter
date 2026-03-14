@@ -1,0 +1,30 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.5, pytest-8.3.4, pluggy-1.5.0 -- /opt/anaconda3/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/alisonjingmarch/Documents/CodePath/AI110/ai110-module1show-gameglitchinvestigator-starter
+plugins: anyio-4.7.0
+collecting ... collected 21 items
+
+tests/test_game_logic.py::test_winning_guess PASSED                      [  4%]
+tests/test_game_logic.py::test_guess_too_high PASSED                     [  9%]
+tests/test_game_logic.py::test_guess_too_low PASSED                      [ 14%]
+tests/test_game_logic.py::test_too_high_hint_says_go_lower PASSED        [ 19%]
+tests/test_game_logic.py::test_too_low_hint_says_go_higher PASSED        [ 23%]
+tests/test_game_logic.py::test_check_guess_always_works_with_int_secret PASSED [ 28%]
+tests/test_game_logic.py::test_win_on_first_attempt_gives_90_points PASSED [ 33%]
+tests/test_game_logic.py::test_win_on_second_attempt_gives_80_points PASSED [ 38%]
+tests/test_game_logic.py::test_win_score_never_goes_below_10 PASSED      [ 42%]
+tests/test_game_logic.py::test_too_low_deducts_5 PASSED                  [ 47%]
+tests/test_game_logic.py::test_too_high_even_attempt_adds_5 PASSED       [ 52%]
+tests/test_game_logic.py::test_too_high_odd_attempt_deducts_5 PASSED     [ 57%]
+tests/test_game_logic.py::test_parse_valid_integer PASSED                [ 61%]
+tests/test_game_logic.py::test_parse_float_string_truncates_to_int PASSED [ 66%]
+tests/test_game_logic.py::test_parse_empty_string_returns_error PASSED   [ 71%]
+tests/test_game_logic.py::test_parse_none_returns_error PASSED           [ 76%]
+tests/test_game_logic.py::test_parse_non_numeric_returns_error PASSED    [ 80%]
+tests/test_game_logic.py::test_easy_range PASSED                         [ 85%]
+tests/test_game_logic.py::test_normal_range PASSED                       [ 90%]
+tests/test_game_logic.py::test_hard_range PASSED                         [ 95%]
+tests/test_game_logic.py::test_hard_range_is_larger_than_normal PASSED   [100%]
+
+============================== 21 passed in 0.03s ==============================
