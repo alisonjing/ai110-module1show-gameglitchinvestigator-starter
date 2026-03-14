@@ -2,10 +2,111 @@ import random
 import streamlit as st
 from logic_utils import get_range_for_difficulty, parse_guess, check_guess, update_score
 
-st.set_page_config(page_title="Glitchy Guesser", page_icon="🎮")
+st.set_page_config(page_title="Glitchy Guesser", page_icon="🎮", layout="centered")
+
+# ── Custom UI Styling ──────────────────────────────────────────────────────────
+st.markdown("""
+<style>
+/* Animated gradient background */
+[data-testid="stAppViewContainer"] {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Sidebar background */
+[data-testid="stSidebar"] {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Main content card */
+[data-testid="stVerticalBlock"] {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    padding: 8px;
+}
+
+/* Title styling */
+h1 {
+    color: #ffffff !important;
+    text-align: center;
+    font-size: 2.8rem !important;
+    text-shadow: 0 0 20px #a855f7, 0 0 40px #6366f1;
+    letter-spacing: 2px;
+}
+
+/* Subheader */
+h3 {
+    color: #c4b5fd !important;
+    text-align: center;
+}
+
+/* Score display */
+.score-box {
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    border-radius: 12px;
+    padding: 12px 24px;
+    text-align: center;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+}
+
+/* Buttons */
+.stButton > button {
+    background: linear-gradient(135deg, #6366f1, #a855f7) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 0.5rem 1.5rem !important;
+    font-weight: bold !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4) !important;
+}
+
+.stButton > button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6) !important;
+}
+
+/* Text input */
+.stTextInput > div > div > input {
+    background: rgba(255,255,255,0.08) !important;
+    border: 1px solid rgba(168, 85, 247, 0.5) !important;
+    border-radius: 10px !important;
+    color: white !important;
+    font-size: 1.1rem !important;
+    text-align: center !important;
+}
+
+/* Caption text */
+.stCaption, p {
+    color: #a5b4fc !important;
+}
+
+/* General text */
+label, .stMarkdown p {
+    color: #e0e7ff !important;
+}
+</style>
+""", unsafe_allow_html=True)
 
 st.title("🎮 Game Glitch Investigator")
-st.caption("An AI-generated guessing game. Something is off.")
+st.markdown(
+    "<p style='text-align:center; color:#a5b4fc; font-size:1rem;'>"
+    "An AI-generated guessing game — fixed and ready to play.</p>",
+    unsafe_allow_html=True
+)
 
 st.sidebar.header("Settings")
 
@@ -18,7 +119,7 @@ difficulty = st.sidebar.selectbox(
 attempt_limit_map = {
     "Easy": 6,
     "Normal": 8,
-    "Hard": 5,
+    "Hard": 10,  #FIX, increased # of tries based on level of difficulty
 }
 attempt_limit = attempt_limit_map[difficulty]
 
@@ -41,6 +142,11 @@ if "status" not in st.session_state:
 
 if "history" not in st.session_state:
     st.session_state.history = []
+
+st.markdown(
+    f"<div class='score-box'>⭐ Score: {st.session_state.score}</div>",
+    unsafe_allow_html=True
+)
 
 st.subheader("Make a guess")
 

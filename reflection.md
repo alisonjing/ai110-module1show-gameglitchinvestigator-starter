@@ -147,10 +147,10 @@ Still had 7+ bugs — all of them silent, behavioral bugs that only appeared dur
 The hardest bugs to catch were the ones that seemed intentional:
 
 
-# Looks like a reasonable scoring formula...
+ **Looks like a reasonable scoring formula...**
 points = 100 - 10 * (attempt_number + 1)  # but the +1 was wrong
 
-# Looks like it's handling a type safety edge case...
+**Looks like it's handling a type safety edge case...**
 if attempts % 2 == 0:
     secret = str(st.session_state.secret)  # but it was making the game unwinnable
 What to do differently next time:
