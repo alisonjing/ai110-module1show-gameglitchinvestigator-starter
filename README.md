@@ -23,6 +23,8 @@ It wrote the code, ran away, and now the game is unplayable.
    - Run `pytest` in your terminal.
    - Keep fixing until all tests pass!
 
+   ![All tests are passed](Passed.png)
+
 ## 📝 Document Your Experience
 
 - [ ] Describe the game's purpose.
