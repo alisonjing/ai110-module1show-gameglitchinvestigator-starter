@@ -100,12 +100,12 @@ Imagine Streamlit like a whiteboard that gets erased and redrawn from top to bot
 This is called a rerun. Every interaction causes the entire Python script to re-execute from line 1.
 
 - Session State
-Because the whole script reruns on every click, regular Python variables reset to their default values every time. That's a problem — if you store the secret number in a normal variable, it picks a new random number on every rerun!
+Because the whole script reruns on every click, regular Python variables reset to their default values every time. That's a problem if you store the secret number in a normal variable, it picks a new random number on every rerun!
 
 st.session_state is Streamlit's solution — a persistent backpack that survives reruns:
 
 
- Normal variable — RESETS every rerun (bug!)
+Normal variable — RESETS every rerun (bug!)
 secret = random.randint(1, 100)  # new number every click 
 
 Session state — SURVIVES reruns (correct)
@@ -117,7 +117,7 @@ Writing something on a paper (normal variable) — erased when the whiteboard re
 Putting something in your backpack (session_state) — stays with you across reruns
 
 
-# This runs top to bottom... every single time you click a button
+This runs top to bottom... every single time you click a button
 st.title("My App")
 difficulty = st.sidebar.selectbox(...)  # re-executes
 raw_guess = st.text_input(...)          # re-executes
