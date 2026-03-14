@@ -105,10 +105,10 @@ Because the whole script reruns on every click, regular Python variables reset t
 st.session_state is Streamlit's solution — a persistent backpack that survives reruns:
 
 
-# Normal variable — RESETS every rerun (bug!)
+ Normal variable — RESETS every rerun (bug!)
 secret = random.randint(1, 100)  # new number every click 
 
-# Session state — SURVIVES reruns (correct)
+Session state — SURVIVES reruns (correct)
 if "secret" not in st.session_state:
     st.session_state.secret = random.randint(1, 100)  # set only once 
 Think of it like the difference between:
@@ -155,9 +155,9 @@ if attempts % 2 == 0:
     secret = str(st.session_state.secret)  # but it was making the game unwinnable
 What to do differently next time:
 
-Before running AI-generated code, trace through it manually with a concrete example — pick a specific input (e.g., "guess = 60, secret = 50") and follow each line step by step to verify the output matches expectations.
+Before running AI-generated code, trace through it manually with a concrete example, i.e., pick a specific input (e.g., "guess = 60, secret = 50") and follow each line step by step to verify the output matches expectations.
 
 This catches inverted logic, off-by-one errors, and type bugs that automated tools and even a quick glance will miss. Think of it as code review before execution, not just debugging after something breaks.
 
-- This project taught me that AI-generated code can be confidently wrong — it looks polished, runs without errors, and follows correct structure, but can contain subtle logic bugs that only surface when you actually play the game. I now treat AI code the way I'd treat code from a new teammate: read it carefully, trace through it with real examples, and always verify behavior with tests before trusting it.
+- This project taught me that AI-generated code can be confidently wrong: it looks polished, runs without errors, and follows correct structure, but can contain subtle logic bugs that only surface when you actually play the game. I now treat AI code the way I'd treat code from a new teammate: read it carefully, trace through it with real examples, and always verify behavior with tests before trusting it.
 
