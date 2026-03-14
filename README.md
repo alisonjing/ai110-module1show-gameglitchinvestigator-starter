@@ -34,7 +34,8 @@ It wrote the code, ran away, and now the game is unplayable.
 ![Fixed Winning Game](Final_Fixed_Game.png)
 
 
-
 ## 🚀 Stretch Features
 
 - [ ] [If you choose to complete Challenge 4, insert a screenshot of your Enhanced Game UI here]
+
+![Final UI Update](Updated_UI.png)
