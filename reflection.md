@@ -133,3 +133,31 @@ This feels strange at first since most programs only run once. In Streamlit, our
   - This could be a testing habit, a prompting strategy, or a way you used Git.
 - What is one thing you would do differently next time you work with AI on a coding task?
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+
+
+- My answer: One habit or strategy from this project I'd like to reuse is to document all the bugs and flag each comment with #FIXME and a message next to it, also make a summary list of the bugs for record keeping before asking agent to suggest the bug fix solutions, then generate a list of suggested fix and save as a list before reviewing each bug and suggested bug fix one by one and verify accuracy and results. 
+
+- One thing I would do differently: Verify AI-generated code by reading it line by line before running it, rather than trusting it works just because it runs without errors.
+
+This project was a perfect example of why that matters. The AI-generated game:
+
+Ran without crashing — no syntax errors, no exceptions on startup
+Looked correct at a glance — the logic structure made sense
+Still had 7+ bugs — all of them silent, behavioral bugs that only appeared during actual gameplay
+The hardest bugs to catch were the ones that seemed intentional:
+
+
+# Looks like a reasonable scoring formula...
+points = 100 - 10 * (attempt_number + 1)  # but the +1 was wrong
+
+# Looks like it's handling a type safety edge case...
+if attempts % 2 == 0:
+    secret = str(st.session_state.secret)  # but it was making the game unwinnable
+What to do differently next time:
+
+Before running AI-generated code, trace through it manually with a concrete example — pick a specific input (e.g., "guess = 60, secret = 50") and follow each line step by step to verify the output matches expectations.
+
+This catches inverted logic, off-by-one errors, and type bugs that automated tools and even a quick glance will miss. Think of it as code review before execution, not just debugging after something breaks.
+
+- This project taught me that AI-generated code can be confidently wrong — it looks polished, runs without errors, and follows correct structure, but can contain subtle logic bugs that only surface when you actually play the game. I now treat AI code the way I'd treat code from a new teammate: read it carefully, trace through it with real examples, and always verify behavior with tests before trusting it.
+
