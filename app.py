@@ -45,7 +45,7 @@ if "history" not in st.session_state:
 st.subheader("Make a guess")
 
 st.info(
-    f"Guess a number between {low} and {high}. " # Fix f"Guess a number between {low} and {high}. "
+    f"Guess a number between {low} and {high}. " # dynamic range reflects selected difficulty
     f"Attempts left: {attempt_limit - st.session_state.attempts}"
 )
 
@@ -70,8 +70,11 @@ with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
 if new_game:
-    st.session_state.attempts = 1 ##FIXME: new game resets attempt to 1 not 0
-    st.session_state.secret = random.randint(low, high) ##FIXME: should be randint(low,high)
+    st.session_state.attempts = 1          # reset attempt counter to 1 for new game using using Claude Agent mode
+    st.session_state.secret = random.randint(low, high)  # use difficulty range, not hardcoded 1–100 using Claude Agent mode
+    st.session_state.score = 0             # reset score so new game starts fresh using Claude Agent mode
+    st.session_state.status = "playing"    # clear won/lost so st.stop() doesn't fire immediately using Claude Agent mode
+    st.session_state.history = []          # clear guess history for new game using Claude Agent mode
     st.success("New game started.")
     st.rerun()
 

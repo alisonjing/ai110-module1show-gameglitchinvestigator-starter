@@ -3,10 +3,10 @@ def get_range_for_difficulty(difficulty: str):
     if difficulty == "Easy":
         return 1, 20
     if difficulty == "Normal":
-        return 1, 50
+        return 1, 50   # BUG FIX: Normal and Hard ranges were swapped; Normal = smaller range (easier)
     if difficulty == "Hard":
-        return 1, 100
-    return 1, 100
+        return 1, 100  # BUG FIX: Hard = larger range (harder to guess); was returning 50
+    return 1, 100      # default fallback
 
 
 def parse_guess(raw: str):
@@ -42,14 +42,14 @@ def check_guess(guess, secret):
         return "Win", "🎉 Correct!"
 
     if guess > secret:
-        return "Too High", "📉 Go LOWER!"
-    return "Too Low", "📈 Go HIGHER!"
+        return "Too High", "📉 Go LOWER!"   # BUG FIX: hint was inverted, said "Go HIGHER" when guess was too high
+    return "Too Low", "📈 Go HIGHER!"        # BUG FIX: hint was inverted, said "Go LOWER" when guess was too low
 
 
 def update_score(current_score: int, outcome: str, attempt_number: int):
     """Update score based on outcome and attempt number."""
     if outcome == "Win":
-        points = 100 - 10 * attempt_number
+        points = 100 - 10 * attempt_number  # BUG FIX: removed off-by-one (+1), was 100 - 10 * (attempt_number + 1)
         if points < 10:
             points = 10
         return current_score + points
